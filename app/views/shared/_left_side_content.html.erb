@@ -13,8 +13,10 @@
  	<div class="left_section_title">Archives</div>
   <div class="left_section_content">    
    	<ul>
-      <% Story.select("count(stories.id) as stories_count,MONTHNAME(created_at) as month_name,MONTH(created_at) as month").group("MONTH(created_at)").order("month").each do |story| %>
-        <li><%= link_to "#{story.month_name} (<span>#{story.stories_count}</span>)".html_safe,month_stories_path(story.month) %></li>
+      <% Story.all.group_by{|x| x.created_at.month }.sort.each do |key,value| %>
+        <% if value.present? && key.present? %>
+          <li><%= link_to "#{value.flatten.first.created_at.strftime("%b")} (<span>#{value.flatten.count}</span>)".html_safe,month_stories_path(key) %></li>
+        <% end %>
       <% end %>      
     </ul>
   </div>
