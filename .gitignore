@@ -18,6 +18,3 @@
 # Public files
 /public/assets
 /public/system
-
-/.ruby-version
-/.ruby-gemset
