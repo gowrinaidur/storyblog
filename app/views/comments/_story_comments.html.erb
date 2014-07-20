@@ -22,18 +22,7 @@
     </div>
         
     <div class="leave_comment_section">
-        <div class="leave_comment_section_title">Leave a comment</div>
-        <% if flash.present? %>
-          <%flash.each do |type,message|%>
-            <div id="flash" class="flashmsgs">
-              <a href="javascript:;" onclick="hideFlshDiv()" class="closebtn"></a>
-              <div class="message_<%=type %>" style="z-index:1000px">
-                <%= message.titleize.gsub("<Br/>","<br/>").html_safe %>
-              </div>
-              <%flash.discard(type) %>
-            </div>
-          <%end%>        
-        <% end %>
+        <div class="leave_comment_section_title">Leave a comment</div>        
         <%= form_for Comment.new,remote: true do |f| %>        
             <%= f.hidden_field :story_id,value: story.id %>            
             <div class="form_row">
