@@ -10,7 +10,8 @@ class Story < ActiveRecord::Base
   default_scope -> {includes(:comments)}
   scope :popular, -> { order(story_views: :desc) }
   scope :filter_by_category, ->(category) { where("category_id = ?", category) }
-  scope :filter_by_month,	->(month) {where("MONTH(created_at) = ? ",month).order("created_at DESC")}  
+  #scope :filter_by_month,	->(month) {where("MONTH(created_at) = ? ",month).order("created_at DESC")}  
+  scope :filter_by_month,	-> (month) { where("EXTRACT(MONTH FROM created_at) = ?",month).order("created_at DESC") }
 
   validates :title,:content, :presence => true
 end
