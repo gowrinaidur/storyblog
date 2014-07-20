@@ -24,7 +24,7 @@
               <%= image_tag("images/templatemo_image_0#{rand(1..2)}.jpg") %>
             <% end %>
           </div>
-          <p><%= truncate story.content.to_s.html_safe , length: 200 %></p>
+          <p><%= truncate strip_tags(story.content.to_s) , length: 200 %></p>
         </div>
       </div>
 
