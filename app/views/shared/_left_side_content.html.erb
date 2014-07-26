@@ -10,25 +10,25 @@
 </div>      
             
 <div class="templatemo_content_left_section">
- 	<div class="left_section_title">Archives</div>
-  <div class="left_section_content">    
-   	<ul>
-      <% Story.all.group_by{|x| x.created_at.month }.sort.each do |key,value| %>
-        <% if value.present? && key.present? %>
-          <li><%= link_to "#{value.flatten.first.created_at.strftime("%b")} (<span>#{value.flatten.count}</span>)".html_safe,month_stories_path(key) %></li>
+  <div class="left_section_title">popular Stories</div>
+  <div class="left_section_content">
+    <ul>
+        <% Story.popular.limit(7).each do |story| %>
+          <li><%= link_to story.title, story_path(story) %> </li>
         <% end %>
-      <% end %>      
     </ul>
   </div>
 </div>
     
 <div class="templatemo_content_left_section">
-	<div class="left_section_title">popular Stories</div>
-  <div class="left_section_content">
-  	<ul>
-        <% Story.popular.limit(7).each do |story| %>
-          <li><%= link_to story.title, story_path(story) %> written by <%= story.author %></li>
+	<div class="left_section_title">Archives</div>
+  <div class="left_section_content">    
+    <ul>
+      <% Story.all.group_by{|x| x.created_at.month }.sort.each do |key,value| %>
+        <% if value.present? && key.present? %>
+          <li><%= link_to "#{value.flatten.first.created_at.strftime("%B")} (<span>#{value.flatten.count}</span>)".html_safe,month_stories_path(key) %></li>
         <% end %>
+      <% end %>      
     </ul>
   </div>
 </div>
